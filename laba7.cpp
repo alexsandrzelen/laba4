@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <locale.h>
@@ -13,7 +13,7 @@ char* removeExtraSpaces(const char* str) {
 
     while (*src) {
         // Если текущий символ не пробел
-        if (!isspace((unsigned char)*src)) {
+        if (isspace(*src)==0) {
             *dst++ = *src; // Копируем символ
             inWord = 1;    // Устанавливаем флаг "внутри слова"
         }
@@ -26,7 +26,7 @@ char* removeExtraSpaces(const char* str) {
     }
 
     // Удаляем возможный последний пробел
-    if (dst != result && *(dst - 1) == ' ') {
+    if (dst != result && (dst - 1) == ' ') {
         dst--;
     }
 
