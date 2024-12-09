@@ -5,6 +5,7 @@
 
 char* removeExtraSpaces(const char* str) {
     char* result = malloc(strlen(str) + 1); // Выделяем память (максимально возможный размер)
+                   /*возвращает длину строки*/
     if (result==0) return NULL; // Проверка на успешное выделение памяти
 
     char* src = str; // Исходный указатель
@@ -36,12 +37,12 @@ char* removeExtraSpaces(const char* str) {
 
 int main() {
     setlocale(LC_ALL, "Rus");
-    char str[100]; // Размер входной строки
+    char str[10000]; // Размер входной строки
     printf("Введите строку: ");
     fgets(str, sizeof(str), stdin); // Читаем строку
 
     char* cleanedStr = removeExtraSpaces(str);
-    if (cleanedStr) {
+    if (cleanedStr!=0) {
         printf("Результат: %s\n", cleanedStr);
         free(cleanedStr); // Освобождаем выделенную память
     }
