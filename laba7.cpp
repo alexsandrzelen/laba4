@@ -4,19 +4,19 @@
 #include <locale.h>
 
 char* removeExtraSpaces(const char* str) {
-    char* result = malloc(strlen(str) + 1); // Выделяем память (максимально возможный размер)
+    char* result = malloc(strlen(str) + 1); // выделяю еще один байт для завершающего нулевого символа 
                    /*возвращает длину строки*/
-    if (result==0) return NULL; // Проверка на успешное выделение памяти
+    if (result==0) return NULL; 
 
-    char* src = str; // Исходный указатель
+    char* src = str;
     char* dst = result;      // Указатель для записи результата
-    int inWord = 0;         // Флаг, указывающий, находимся ли мы внутри слова
+    int inWord = 0;         
 
     while (*src) {
-        // Если текущий символ не пробел
+        // если текущий символ не пробел
         if (isspace(*src)==0) {
             *dst++ = *src; // Копируем символ
-            inWord = 1;    // Устанавливаем флаг "внутри слова"
+            inWord = 1;    
         }
         else if (inWord) {
             // Если мы находимся в слове и встретили пробел
@@ -26,25 +26,24 @@ char* removeExtraSpaces(const char* str) {
         src++; // Переходим к следующему символу
     }
 
-    // Удаляем возможный последний пробел
     if (dst != result && (dst - 1) == ' ') {
         dst--;
     }
 
-    *dst = '\0'; // Завершаем строку
+    *dst = '\0'; 
     return result; // Возвращаем указатель на новую строку
 }
 
 int main() {
     setlocale(LC_ALL, "Rus");
-    char str[10000]; // Размер входной строки
+    char str[1000]; 
     printf("Введите строку: ");
-    fgets(str, sizeof(str), stdin); // Читаем строку
+    fgets(str, sizeof(str), stdin); 
 
     char* cleanedStr = removeExtraSpaces(str);
     if (cleanedStr!=0) {
         printf("Результат: %s\n", cleanedStr);
-        free(cleanedStr); // Освобождаем выделенную память
+        free(cleanedStr); 
     }
     else {
         printf("Ошибка выделения памяти.\n");
